@@ -1,0 +1,14 @@
+﻿@using forum.Domain.Entities;
+@model IEnumerable<Thread>
+@{
+    ViewBag.Title = "ViewSection";
+}
+
+<h2>ViewSection</h2>
+@foreach (var item in Model)
+{
+    <div>
+        <h3> @Html.ActionLink(item.ThreadName, "ViewThread", new { threadId = item.IdThread})</h3>
+    </div>
+}
+

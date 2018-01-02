@@ -1,0 +1,18 @@
+﻿@using forum.Domain.Entities;
+@model IEnumerable<Post>
+@{
+    ViewBag.Title = "ViewThread";
+}
+
+<h2>ViewThread</h2>
+@foreach (var item in Model)
+{
+    <div class="border: 2px">
+        <h3>@item.Description</h3>
+    </div>
+}
+@using (Html.BeginForm())
+{
+
+}
+@Html.ActionLink("Go Back", "Index")

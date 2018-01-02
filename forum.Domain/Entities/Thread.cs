@@ -9,7 +9,7 @@ namespace forum.Domain.Entities
 {
     public class Thread
     {
-        string ThreadName { get; set; }
+        public string ThreadName { get; set; }
         [Key]
         public int IdThread { get; set; }
         public int IdSection { get; set; }
