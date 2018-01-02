@@ -1,0 +1,15 @@
+﻿@using forum.Domain.Entities
+@model IEnumerable<Post>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+@foreach (var item in Model)
+{
+    <div>
+        <h3>@item.Description</h3>
+    </div>
+
+}
+
