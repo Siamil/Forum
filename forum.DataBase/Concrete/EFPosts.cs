@@ -14,5 +14,24 @@ namespace forum.DataBase.Concrete
         {
             get { return context.Posts; }
         }
+        public void SavePost(Post post)
+        {
+            if (post.IdPost == 0) {
+               
+                context.Posts.Add(post);
+            }
+            else
+            {
+                Post dbEntry = context.Posts.Find(post.IdPost);
+                if (dbEntry != null)
+                {
+
+                    dbEntry.Description = post.Description;
+                    dbEntry.IdThread = post.IdThread;
+                    
+                }
+            }
+            context.SaveChanges();
+        }
     }
 }

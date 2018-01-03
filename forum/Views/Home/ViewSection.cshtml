@@ -1,14 +1,17 @@
 ﻿@using forum.Domain.Entities;
 @model IEnumerable<Thread>
 @{
-    ViewBag.Title = "ViewSection";
+    ViewBag.Title = ViewBag.name;
 }
 
-<h2>ViewSection</h2>
+<h2>@ViewBag.name</h2>
 @foreach (var item in Model)
 {
-    <div>
-        <h3> @Html.ActionLink(item.ThreadName, "ViewThread", new { threadId = item.IdThread})</h3>
-    </div>
+    <div class="row panel" style="border: 2px solid; background-color: antiquewhite; margin: 20px 20px">
+        <h3 style="margin:15px 30px">@Html.ActionLink(item.ThreadName, "ViewThread", new { threadId = item.IdThread })</h3>
+        </div>
+
+        
+    
 }
 

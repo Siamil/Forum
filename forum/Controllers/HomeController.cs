@@ -20,12 +20,27 @@ namespace forum.Controllers
         }
         public ActionResult ViewSection(int sectionId)
         {
-          
+            ViewBag.name = Sections.Sections.First(p => p.IdSection == sectionId).SectionName;
             return View(Threads.Threads.Where(p => p.IdSection == sectionId));
         }
         public ActionResult ViewThread(int threadId)
         {
+            ViewBag.id = threadId;
+            ViewBag.name = Threads.Threads.FirstOrDefault(p => p.IdThread == threadId).ThreadName;
             return View(Posts.Posts.Where(p => p.IdThread == threadId));
+        }
+        [HttpPost]
+        public ActionResult Edit(Post post, int threadId)
+        {
+            post.IdThread = threadId;
+            Posts.SavePost(post);
+            return RedirectToAction("ViewThread", new { threadId = post.IdThread});
+        }
+        public PartialViewResult AddPost(int threadId)
+        {
+            Post post = new Post();
+            ViewBag.id = threadId;
+            return PartialView(post);
         }
     }
 }

@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27004.2009
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "forum.WebUI", "forum\forum.WebUI.csproj", "{898AACE5-425A-44B0-9F37-F3ED2702CDB1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forum.WebUI", "forum\Forum.WebUI.csproj", "{898AACE5-425A-44B0-9F37-F3ED2702CDB1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "forum.Tests", "forum.Tests\forum.Tests.csproj", "{3BEEB69D-04CD-49C5-9AD3-32EA77C92AB0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forum.Tests", "forum.Tests\Forum.Tests.csproj", "{3BEEB69D-04CD-49C5-9AD3-32EA77C92AB0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "forum.Domain", "forum.Domain\forum.Domain.csproj", "{44BEF891-5165-45D8-BF66-DA80B10B795C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forum.Domain", "forum.Domain\Forum.Domain.csproj", "{44BEF891-5165-45D8-BF66-DA80B10B795C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "forum.DataBase", "forum.DataBase\forum.DataBase.csproj", "{DD5DDECA-0BF1-4DD8-9DD4-0892027E2B20}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forum.DataBase", "forum.DataBase\Forum.DataBase.csproj", "{DD5DDECA-0BF1-4DD8-9DD4-0892027E2B20}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

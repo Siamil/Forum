@@ -1,18 +1,15 @@
 ﻿@using forum.Domain.Entities;
 @model IEnumerable<Post>
 @{
-    ViewBag.Title = "ViewThread";
+    ViewBag.Title = ViewBag.name;
 }
 
-<h2>ViewThread</h2>
+<div class="text-center" style="nav-index:auto;"><h1>@ViewBag.name</h1></div>
 @foreach (var item in Model)
 {
-    <div class="border: 2px">
-        <h3>@item.Description</h3>
+    <div class="row panel" style="border: 2px solid; background-color: antiquewhite">
+        <div class="text-left" style="margin: 20px 20px;">@item.Description</div>
     </div>
 }
-@using (Html.BeginForm())
-{
-
-}
+@Html.Action("AddPost", new {threadId = ViewBag.id })
 @Html.ActionLink("Go Back", "Index")
