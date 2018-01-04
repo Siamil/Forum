@@ -1,0 +1,17 @@
+﻿
+@model Forum.Web.Models.ThreadViewModel
+@{
+    ViewBag.Title = @Model.Name;
+}
+
+<div class="text-center" style="nav-index:auto;"><h1>@Model.Name</h1></div>
+@foreach (var item in Model.Posts)
+{
+    <div class="row panel" style="border: 2px solid; background-color: antiquewhite">
+        <div class="panel-footer" style="border: 2px;">@item.UserName</div>
+        <div class="panel-body text-left" style="margin: 2px 2px;">@item.Description</div>
+    </div>
+}
+
+@Html.Action("AddPost", new {threadId = Model.threadId })
+@Html.ActionLink("Go Back", "Index")

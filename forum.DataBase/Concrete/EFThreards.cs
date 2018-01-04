@@ -14,5 +14,26 @@ namespace forum.DataBase.Concrete
         {
             get { return context.Threads; }
         }
+        public void SaveThread(Thread thread)
+        {
+            if (thread.IdThread == 0)
+            {
+
+                context.Threads.Add(thread);
+            }
+            else
+            {
+                Thread dbEntry = context.Threads.Find(thread.IdThread);
+                if (dbEntry != null)
+                {
+
+                    dbEntry.ThreadName = thread.ThreadName;
+                    dbEntry.IdSection = thread.IdSection;
+                    dbEntry.Description = thread.Description;
+
+                }
+            }
+            context.SaveChanges();
+        }
     }
 }

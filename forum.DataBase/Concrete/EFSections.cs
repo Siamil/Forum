@@ -14,5 +14,14 @@ namespace forum.DataBase.Concrete
         {
             get { return context.Sections; }
         }
+        public void SaveSection(Section section)
+        {
+            if (section.IdSection == 0)
+            {
+
+                context.Sections.Add(section);
+            }
+            context.SaveChanges();
+        }
     }
 }

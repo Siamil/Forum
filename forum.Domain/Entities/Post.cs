@@ -14,6 +14,8 @@ namespace forum.Domain.Entities
         public int IdPost { get; set; }
         public int IdThread { get; set; }
         public string Description { get; set; }
+       
+        public string UserName {get; set;}
         User PostUser { get; set; }
     }
 }

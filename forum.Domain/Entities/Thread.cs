@@ -13,7 +13,7 @@ namespace forum.Domain.Entities
         [Key]
         public int IdThread { get; set; }
         public int IdSection { get; set; }
-        Section section { get; set; }
+        public string Description { get; set; }        
         List <Post> ThreadPosts { get; set; }
         public void AddPost (Post post)
         {
