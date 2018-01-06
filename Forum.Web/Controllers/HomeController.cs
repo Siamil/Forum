@@ -29,13 +29,19 @@ namespace Forum.Web.Controllers
         }
         public ActionResult ViewSection(int sectionId)
         {
-            SectionViewModel sectionVM = new SectionViewModel(sectionId, Sections, Threads);
+            SectionViewModel sectionVM = new SectionViewModel(sectionId, Sections, Threads, Posts);
             return View(sectionVM);
         }
         public ActionResult ViewThread(int threadId)
         {
-            ThreadViewModel ThreadVM = new ThreadViewModel(threadId, Threads, Posts);
+            ThreadViewModel ThreadVM = new ThreadViewModel(threadId, Threads, Posts, User.Identity.Name);
             return View(ThreadVM);
+        }
+        public ActionResult RemovePost(int postId)
+        {
+           int threadId = Posts.Posts.First(p => p.IdPost == postId).IdThread;
+           Posts.DeletePost(postId);
+            return RedirectToAction("ViewThread", new { threadId = threadId });
         }
         
         [HttpPost]
@@ -58,6 +64,7 @@ namespace Forum.Web.Controllers
         [HttpPost]
         public ActionResult SaveThread(Thread thread, int sectionId)
         {
+            thread.UserName = User.Identity.Name;
             thread.IdSection = sectionId;
             Threads.SaveThread(thread);
             return RedirectToAction("ViewSection", new { sectionId = thread.IdSection });

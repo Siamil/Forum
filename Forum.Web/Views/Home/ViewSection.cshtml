@@ -2,19 +2,32 @@
 @model Forum.Web.Models.SectionViewModel
 
 
-<div class="panel-heading col-lg-11 " style="border: 3px solid; margin-top: 30px;"><div style="border: 2px solid; background-color:darkgoldenrod"><h2 class ="text-center"style="color: antiquewhite; ">@Model.Name</h2></div>
-    <div>
+<table class="table table-striped col-md-2">
+    <colgroup>
+        <col>
+        <col span="2" class="info">
+        <col span="2" class="success">
+    </colgroup>
+    <thead class="thead-inverse">
+        <tr>
+            <th>Thread Name </th>
+            <th class="text-center">Thread Author</th>
+            <th class="text-center">Number of posts</th>
+        </tr>
+        </thead>
+    <tbody>
         @foreach (var item in Model.threads)
         {
-            <div class="navbar navbar-inverse"
-                 style="border: 2px solid; background-color: lightgray; margin: 20px 20px">
-                <h3 style="margin:15px 30px">@Html.ActionLink(item.ThreadName, "ViewThread", new { threadId = item.IdThread })</h3>
-                <h5>@item.Description</h5>
-            </div>
+            <tr>
+                <td class="col-md-8">@Html.ActionLink(item.ThreadName, "ViewThread", new { threadId = item.IdThread })</td>
+                <td class="col-md-2 text-center">@item.UserName</td>
+                <td class="col-md-2 text-center">@Model.CountPosts(item.IdThread)</td>
+            </tr>
 
         }
-    </div>
-</div>
+    </tbody>
+
+</table>
 <div class="btn" style="margin: 20px 20px">
     <input type="submit" value="AddThread" class="btn-default" style="background-color:antiquewhite;" onclick="location.href='@Url.Action("AddThread", "Home", new { sectionId = Model.sectionId })'" />
 

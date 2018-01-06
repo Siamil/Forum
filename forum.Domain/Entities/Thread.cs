@@ -15,6 +15,7 @@ namespace forum.Domain.Entities
         public int IdSection { get; set; }
         public string Description { get; set; }        
         List <Post> ThreadPosts { get; set; }
+        public string UserName { get; set; }
         public void AddPost (Post post)
         {
             ThreadPosts.Add(post);
