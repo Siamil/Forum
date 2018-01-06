@@ -33,6 +33,17 @@ namespace forum.DataBase.Concrete
 
                 }
             }
+
+            context.SaveChanges();
+        }
+        public void DeleteThread(int threadId)
+        {
+            Thread dbEntry = context.Threads.Find(threadId);
+            if (dbEntry != null)
+            {
+                context.Threads.Remove(dbEntry);
+                
+            }
             context.SaveChanges();
         }
     }

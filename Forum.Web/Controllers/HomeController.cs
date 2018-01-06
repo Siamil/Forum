@@ -18,8 +18,8 @@ namespace Forum.Web.Controllers
 
         public ActionResult Index()
         {
-            
-            return View(Sections.Sections);
+            HomeViewModel HomeVM = new HomeViewModel(Sections, User, Threads);
+            return View(HomeVM);
         }
         [Authorize(Roles = "Admin")]
         public ActionResult SaveSection(Section section)
@@ -29,12 +29,12 @@ namespace Forum.Web.Controllers
         }
         public ActionResult ViewSection(int sectionId)
         {
-            SectionViewModel sectionVM = new SectionViewModel(sectionId, Sections, Threads, Posts);
+            SectionViewModel sectionVM = new SectionViewModel(sectionId, Sections, Threads, Posts, User);
             return View(sectionVM);
         }
         public ActionResult ViewThread(int threadId)
         {
-            ThreadViewModel ThreadVM = new ThreadViewModel(threadId, Threads, Posts, User.Identity.Name);
+            ThreadViewModel ThreadVM = new ThreadViewModel(threadId, Threads, Posts, User);
             return View(ThreadVM);
         }
         public ActionResult RemovePost(int postId)
@@ -43,13 +43,15 @@ namespace Forum.Web.Controllers
            Posts.DeletePost(postId);
             return RedirectToAction("ViewThread", new { threadId = threadId });
         }
-        
+       
+
         [HttpPost]
         [Authorize(Roles = "User")]
         public ActionResult Edit(Post post, int threadId)
         {
             
             post.UserName = User.Identity.Name;
+            
             post.IdThread = threadId;
             Posts.SavePost(post);
             return RedirectToAction("ViewThread", new { threadId = post.IdThread });

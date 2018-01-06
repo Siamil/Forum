@@ -5,8 +5,12 @@ using Microsoft.Owin.Security;
 
 namespace Forum.Web.Models
 {
-    public class IndexViewModel
+    public class ForumViewModel
     {
+        public ForumViewModel()
+        {
+        }
+
         public bool HasPassword { get; set; }
         public IList<UserLoginInfo> Logins { get; set; }
         public string PhoneNumber { get; set; }

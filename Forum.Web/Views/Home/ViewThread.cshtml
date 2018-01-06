@@ -10,7 +10,7 @@
     <div class="row panel" style="border: 2px solid; background-color: antiquewhite">
         <div class="panel-footer" style="border: 2px;">@item.UserName</div>
         <div class="panel-body text-left" style="margin: 2px 2px;">@item.Description</div>
-        @if (Model.CurrentUser == item.UserName)
+        @if (Model.user.Identity.Name == item.UserName || Model.user.IsInRole("Admin"))
         { 
             <div class="btn pull-right" style="margin: 20px 20px">
                 <input type="submit" value="Remove Post" class="btn-default" style="background-color:antiquewhite;" onclick="location.href='@Url.Action("RemovePost", "Home", new { postId = item.IdPost })'" />

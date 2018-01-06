@@ -23,5 +23,15 @@ namespace forum.DataBase.Concrete
             }
             context.SaveChanges();
         }
+        public void DeleteSection(int sectionId)
+        {
+            Section dbEntry = context.Sections.Find(sectionId);
+            if (dbEntry != null)
+            {
+                
+                context.Sections.Remove(dbEntry);
+                context.SaveChanges();
+            }
+        }
     }
 }

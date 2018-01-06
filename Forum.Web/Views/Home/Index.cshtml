@@ -1,5 +1,5 @@
-﻿@using forum.Domain.Entities
-@model IEnumerable<Section>
+﻿@using Forum.Web.Models
+@model Forum.Web.Models.HomeViewModel
     @{
         ViewBag.Title = "Index";
     }
@@ -13,14 +13,25 @@
     <thead class="thead-inverse">
         <tr>
             <th>Section Name </th>
-            
+            <th class="text-center">Number Of Threads</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @foreach (var item in Model.Sections.Sections)
         {
             <tr>
-                <td class="col-md-8">@Html.ActionLink(item.SectionName, "ViewSection", new { sectionId = item.IdSection })</td> 
+                <td class="col-md-6">@Html.ActionLink(item.SectionName, "ViewSection", new { sectionId = item.IdSection })</td>
+                <td class="col-md-4 text-center">@Model.CountThreads(item.IdSection)</td>
+                @if (Model.User.IsInRole("Admin"))
+                {
+                    <td class ="col-md-2" style="margin: 20px 20px">
+                            <input type="submit" value="Remove Section" class="btn-default" style="background-color:antiquewhite;" onclick="location.href='@Url.Action("RemoveSection", "Admin", new { sectionId = item.IdSection })'" />
+                    </td>
+
+                }
+                
+                
+                
             </tr>
 
         }
