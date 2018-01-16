@@ -10,18 +10,21 @@ namespace Forum.Web.Models
     public class HomeViewModel
     {
         public EFSections Sections { get; set; }
-       public  IPrincipal User { get; set; }
-       public  EFThreards Threads { get; set; }
+        public IPrincipal User { get; set; }
+        public EFOverSections OverSections { get; set; }
+        public EFThreards Threads { get; set; }
 
-        public HomeViewModel(EFSections sections, IPrincipal user, EFThreards threads)
+        public HomeViewModel(EFSections sections, IPrincipal user, EFThreards threads, EFOverSections overSections)
         {
             this.Sections = sections;
             this.User = user;
             this.Threads = threads;
+            this.OverSections = overSections;
         }
         public int CountThreads(int sectionId)
         {
             return Threads.Threads.Where(p => p.IdSection == sectionId).Count();
         }
     }
+
 }

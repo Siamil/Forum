@@ -1,0 +1,19 @@
+﻿@model forum.Domain.Entities.Post
+
+@{
+    ViewBag.Title = "EditPost";
+}
+
+<h2>EditPost</h2>
+
+
+@using (Html.BeginForm("SavePost", "Post"))
+{
+
+    @Html.HiddenFor(m => m.IdPost)
+    @Html.HiddenFor(m => m.UserName)
+    @Html.HiddenFor(m => m.IdThread)
+    @Html.HiddenFor(m => m.DateTime)
+    @Html.TextArea("Description")
+    <input type="submit" value="Add Post" />
+}

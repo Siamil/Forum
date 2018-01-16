@@ -68,6 +68,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\OverSection.cs" />
     <Compile Include="Entities\Post.cs" />
     <Compile Include="Entities\Section.cs" />
     <Compile Include="Entities\Thread.cs" />

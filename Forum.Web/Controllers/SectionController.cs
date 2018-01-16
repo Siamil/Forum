@@ -9,40 +9,26 @@ using forum.Domain.Entities;
 using Microsoft.AspNet.Identity;
 using System.Web.Security;
 using Microsoft.AspNet.Identity.EntityFramework;
-
 namespace Forum.Web.Controllers
 {
-    public class HomeController : Controller
+    public class SectionController : Controller
     {
         private EFPosts Posts = new EFPosts();
         private EFSections Sections = new EFSections();
         private EFThreards Threads = new EFThreards();
         private EFOverSections OverSections = new EFOverSections();
-       
 
-
-        public ActionResult Index()
+        [Authorize(Roles = "Admin")]
+        public ActionResult SaveSection(Section section, int overSectionId)
         {
-            HomeViewModel HomeVM = new HomeViewModel(Sections, User, Threads, OverSections);
-            return View(HomeVM);
+            section.OverSectionId = overSectionId;
+            Sections.SaveSection(section);
+            return RedirectToAction("Index","Home", null);
         }
-       
-        
-        
-       
-    
-        public ActionResult About()
+        public ActionResult ViewSection(int sectionId)
         {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            SectionViewModel sectionVM = new SectionViewModel(sectionId, Sections, Threads, Posts, User);
+            return View(sectionVM);
         }
     }
 }

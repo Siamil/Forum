@@ -1,0 +1,31 @@
+﻿
+@model Forum.Web.Models.ThreadViewModel
+@{
+    ViewBag.Title = @Model.Name;
+}
+
+<div class="text-center" style="nav-index:auto;"><h1>@Model.Name</h1></div>
+@foreach (var item in Model.Posts.ToList())
+{
+    
+    <div class="panel panel-default" style="border: 2px solid; background-color: antiquewhite">
+        <div class="panel-heading" style="border: 2px;">@Html.ActionLink(item.UserName, "Users", new { userName = item.UserName})  <p class="text-left">@item.DateTime</p>
+        @if (Model.user.Identity.Name == item.UserName || Model.user.IsInRole("Admin"))
+        {
+            <div class=" panel-heading pull-right" >
+                <input type="submit" value="Edit Post" class="btn btn-success" onclick="location.href='@Url.Action("EditPost", "Home", new { postId = item.IdPost }, null)'" />
+            </div>
+            <div class=" panel-heading pull-right" >
+                <input type="submit" value="Remove Post" class="btn btn-danger" onclick="location.href='@Url.Action("RemovePost", "Home", new { postId = item.IdPost })'" />
+            </div>
+        }
+            <div class="container panel-body text-left" style="margin: 2px 2px;">
+                @item.Description
+            </div>
+        </div> 
+        
+    </div>
+}
+
+@Html.Action("AddPost","Post", new {threadId = Model.threadId })
+@Html.ActionLink("Go Back", "Index")

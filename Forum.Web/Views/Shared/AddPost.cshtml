@@ -1,10 +1,11 @@
 ﻿@model forum.Domain.Entities.Post
 
 
-@using (Html.BeginForm("Edit", "Home", new { threadId = ViewBag.id }))
+@using (Html.BeginForm("Edit", "Post", new { threadId = ViewBag.id }))
 {
 
-
+    
     @Html.TextArea("Description", null, new { @class = "form-control" })
+    @Html.ValidationSummary()
     <input type="submit" value="Add Post" />
 }

@@ -21,8 +21,9 @@ namespace Forum.Web.Models
             this.threadId = threadId;
             this.threads = threads;
             this.posts = posts;
-            Posts = posts.Posts;
+            Posts = posts.Posts.Where(p => p.IdThread == threadId);
             this.user = user;
+            Name = threads.Threads.First(p => p.IdThread == threadId).ThreadName;
         }
 
         public int threadId { get; set; }

@@ -23,8 +23,8 @@ namespace Forum.Web.Controllers
         }
         public ActionResult RemoveThread(int threadId)
         {
-            int sectionId = Threads.Threads.First(p => p.IdThread == threadId).IdThread;
-            foreach (var item in Posts.Posts.Where(p => p.IdThread == threadId))
+            int sectionId = Threads.Threads.First(p => p.IdThread == threadId).IdSection;
+            foreach (var item in Posts.Posts.Where(p => p.IdThread == threadId).ToList())
             {
                 Posts.DeletePost(item.IdPost);
             }

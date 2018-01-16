@@ -1,0 +1,41 @@
+﻿@model Forum.Web.Models.UserViewModel
+
+@{
+    ViewBag.Title = "Users";
+}
+
+<table class="table-bordered" align="center" style="margin-top: 20px;">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Number of Posts</th>   
+            <th>Threads made by user</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                @Model.user.UserName
+            </td>
+            <td class="text-center">
+                @Model.CountPosts()
+            </td>
+            <td>
+                <ul>
+                    @foreach (var item in Model.userThreads.ToList())
+                    {
+
+                        <li> @Html.ActionLink(item.ThreadName, "ViewThread", "Thread", new { threadId = item.IdThread })</li>
+
+                    }
+                </ul>
+
+                </td>
+                </tr>
+            </tbody>
+</table>
+
+        
+
+
+

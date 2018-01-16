@@ -27,8 +27,7 @@ namespace forum.DataBase.Concrete
                 {
 
                     dbEntry.Description = post.Description;
-                    dbEntry.IdThread = post.IdThread;
-                    
+                     
                 }
             }
             context.SaveChanges();

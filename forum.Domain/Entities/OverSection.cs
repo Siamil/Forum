@@ -2,16 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
+using System.Threading.Tasks;
 
 namespace forum.Domain.Entities
 {
-    public class Section
+    public class OverSection
     {
         [Key]
-        public int IdSection { get; set; }
-        public string SectionName { get; set; }
         public int OverSectionId { get; set; }
+        public string Name { get; set; }
     }
 }

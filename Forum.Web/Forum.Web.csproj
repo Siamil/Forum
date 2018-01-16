@@ -209,6 +209,10 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PostController.cs" />
+    <Compile Include="Controllers\SectionController.cs" />
+    <Compile Include="Controllers\ThreadController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -219,6 +223,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\SectionViewModel.cs" />
     <Compile Include="Models\ThreadViewModel.cs" />
+    <Compile Include="Models\UserViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -278,13 +283,15 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Home\ViewSection.cshtml" />
-    <Content Include="Views\Home\ViewThread.cshtml" />
+    <Content Include="Views\Section\ViewSection.cshtml" />
+    <Content Include="Views\Thread\ViewThread.cshtml" />
     <Content Include="Views\Shared\AddPost.cshtml" />
     <Content Include="Views\Web.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Views\Home\AddThread.cshtml" />
+    <Content Include="Views\Thread\AddThread.cshtml" />
+    <Content Include="Views\User\Users.cshtml" />
+    <Content Include="Views\Post\EditPost.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

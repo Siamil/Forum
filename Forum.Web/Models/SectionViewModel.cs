@@ -13,7 +13,7 @@ namespace Forum.Web.Models
         EFPosts Posts;
         public SectionViewModel(int sectionId, EFSections sections, EFThreards threads, EFPosts posts, IPrincipal user)
         {
-            Name = sections.Sections.FirstOrDefault(x => x.IdSection == sectionId).SectionName;
+            Name = sections.Sections.First(x => x.IdSection == sectionId).SectionName;
             this.threads = threads.Threads.Where(x => x.IdSection == sectionId);
             this.sectionId = sectionId;
             this.User = user;

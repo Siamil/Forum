@@ -13,6 +13,7 @@ namespace forum.DataBase.Concrete
         public DbSet<Post> Posts { get; set; }
         public DbSet<Section> Sections { get; set; }
         public DbSet<Thread> Threads { get; set; }
+        public DbSet<OverSection> OverSections { get; set; }
         
     }
 }

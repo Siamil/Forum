@@ -69,6 +69,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Concrete\EFDbContext.cs" />
+    <Compile Include="Concrete\EFOverSections.cs" />
     <Compile Include="Concrete\EFPosts.cs" />
     <Compile Include="Concrete\EFThreards.cs" />
     <Compile Include="Concrete\EFSections.cs" />

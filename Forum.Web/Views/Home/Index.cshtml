@@ -4,52 +4,61 @@
         ViewBag.Title = "Index";
     }
 
-    <table class="table table-striped col-md-2">
-    <colgroup>
-        <col>
-        <col span="2" class="info">
-        <col span="2" class="success">
-    </colgroup>
-    <thead class="thead-inverse">
-        <tr>
-            <th>Section Name </th>
-            <th class="text-center">Number Of Threads</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.Sections.Sections)
-        {
-            <tr>
-                <td class="col-md-6">@Html.ActionLink(item.SectionName, "ViewSection", new { sectionId = item.IdSection })</td>
-                <td class="col-md-4 text-center">@Model.CountThreads(item.IdSection)</td>
-                @if (Model.User.IsInRole("Admin"))
+
+    @foreach (var over in Model.OverSections.OverSections)
+    {
+        <div class="panel-default">
+            <div class="panel panel-heading panel-title" style="background-color:">@over.Name</div>
+            <table class="table table-bordered col-md-2 panel-body" border="1" style="background-color: white;">
+                <colgroup>
+                    <col>
+                    <col span="2" class="info">
+                    <col span="2" class="success">
+                </colgroup>
+                <thead class="thead-inverse">
+                    <tr>
+                        <th>Section Name </th>
+                        <th class="text-center">Number Of Threads</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Sections.Sections)
                 {
-                    <td class ="col-md-2" style="margin: 20px 20px">
-                            <input type="submit" value="Remove Section" class="btn-default" style="background-color:antiquewhite;" onclick="location.href='@Url.Action("RemoveSection", "Admin", new { sectionId = item.IdSection })'" />
-                    </td>
+                    if (item.OverSectionId == over.OverSectionId)
+                    {
+                            <tr>
+                                <td class="col-md-6">@Html.ActionLink(item.SectionName, "ViewSection", "Section", new { sectionId = item.IdSection },null)</td>
+                                <td class="col-md-4 text-center">@Model.CountThreads(item.IdSection)</td>
+                                @if (Model.User.IsInRole("Admin"))
+                                {
+                                    <td class="col-md-2" style="margin: 20px 20px">
+                                        <input type="submit" value="Remove Section" class="btn btn-primary" onclick="location.href='@Url.Action("RemoveSection", "Admin", new { sectionId = item.IdSection })'" />
+                                    </td>
+                                }
+                            </tr>
+                        }
+                    }
+                </tbody>
+
+            </table>
+            @if (Model.User.IsInRole("Admin"))
+            {
+                using (Html.BeginForm("SaveSection", "Section", new { overSectionId = over.OverSectionId}))
+                {
+                    <div class="col-md-2">
+                        @Html.TextBox("sectionName")
+
+                    </div>
+                    <input type="submit" class="btn btn-success" value="Add Section" />
 
                 }
-                
-                
-                
-            </tr>
+            }
 
-        }
-    </tbody>
-
-</table>
-
-
-
-
-@using(Html.BeginForm("SaveSection", "Home"))
-{
-
-                <div class="form-group">
-        
-        <div class="col-md-10">
-            @Html.TextBox("sectionName")
         </div>
-    </div>
-    <input type="submit" value="Add Section" />
-}
+
+    }
+
+
+
+
+

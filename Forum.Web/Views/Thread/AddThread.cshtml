@@ -5,7 +5,7 @@
 }
 
 <h2>AddThread</h2>
-@using (Html.BeginForm("SaveThread", "Home", new { sectionId = ViewBag.Id }))
+@using (Html.BeginForm("SaveThread", "Thread", new { sectionId = ViewBag.Id }))
 {
 <div class="form-group">
     @Html.LabelFor(m => m.ThreadName, new { @class = "col-md-2 control-label" })
@@ -19,5 +19,5 @@
         @Html.TextBoxFor(m => m.Description, new { @class = "form-control" })
     </div>
 </div>
-    <input type="submit" value="Save Thread" />
+    <input type="submit" class="btn btn-success" value="Save Thread" />
 }
