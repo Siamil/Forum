@@ -64,7 +64,7 @@ namespace Forum.Web.Controllers
                 : "";
 
             var userId = User.Identity.GetUserId();
-            var model = new ForumViewModel
+            var model = new IndexViewModel
             {
                 HasPassword = HasPassword(),
                 PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),

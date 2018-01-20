@@ -5,27 +5,74 @@
 }
 
 <div class="text-center" style="nav-index:auto;"><h1>@Model.Name</h1></div>
-@foreach (var item in Model.Posts.ToList())
+@foreach (var item in Model.Posts.Skip((Model.pager.CurrentPage - 1) * Model.pager.PageSize).Take(Model.pager.PageSize))
 {
     
     <div class="panel panel-default" style="border: 2px solid; background-color: antiquewhite">
-        <div class="panel-heading" style="border: 2px;">@Html.ActionLink(item.UserName, "Users", new { userName = item.UserName})  <p class="text-left">@item.DateTime</p>
+        <div class="panel-heading" style="border: 2px;">@Html.ActionLink(item.UserName, "Users", new { userName = item.UserName})  <p class="text-left">
+    @item.DateTime
         @if (Model.user.Identity.Name == item.UserName || Model.user.IsInRole("Admin"))
         {
-            <div class=" panel-heading pull-right" >
-                <input type="submit" value="Edit Post" class="btn btn-success" onclick="location.href='@Url.Action("EditPost", "Home", new { postId = item.IdPost }, null)'" />
-            </div>
-            <div class=" panel-heading pull-right" >
-                <input type="submit" value="Remove Post" class="btn btn-danger" onclick="location.href='@Url.Action("RemovePost", "Home", new { postId = item.IdPost })'" />
-            </div>
+
+            <input type="submit" value="Edit Post" class="btn btn-success pull-right" style="margin:0px 5px" onclick="location.href='@Url.Action("EditPost", "Post", new { postId = item.IdPost }, null)'" />
+
+
+                <input type="submit" value="Remove Post" class="btn btn-danger pull-right" onclick="location.href='@Url.Action("RemovePost", "Post", new { postId = item.IdPost }, null)'" />
+
         }
-            <div class="container panel-body text-left" style="margin: 2px 2px;">
+    </p>
+
+            <div class="container panel-body text-left" style="margin: 2px 2px; word-wrap:break-word">
                 @item.Description
             </div>
         </div> 
         
     </div>
 }
+<div class="container">
+    <div class="col-md-6 col-md-offset-3">
+        
 
-@Html.Action("AddPost","Post", new {threadId = Model.threadId })
-@Html.ActionLink("Go Back", "Index")
+        <!-- items being paged -->
+        <!-- pager -->
+        @if (Model.pager.EndPage > 1)
+        {
+            <ul class="pagination">
+                @if (Model.pager.CurrentPage > 1)
+                {
+                    <li>
+                        @Html.ActionLink("First", "ViewThread") 
+                        
+                    </li>
+                    <li>
+                        @Html.ActionLink("Previouse", "ViewThread", new { page = Model.pager.CurrentPage - 1}) 
+                        
+                    </li>
+                }
+
+                @for (var page = Model.pager.StartPage; page <= Model.pager.EndPage; page++)
+                {
+                    <li class="@(page == Model.pager.CurrentPage ? "active" : "")">    
+                        @Html.ActionLink(page.ToString(), "ViewThread", new { page = page, threadId = Model.threadId})
+                        
+                    </li>
+                }
+
+                @if (Model.pager.CurrentPage < Model.pager.TotalPages)
+                {
+                    <li>
+                        
+                        @Html.ActionLink("Next", "ViewThread", new { page = Model.pager.CurrentPage + 1 }) 
+                    </li>
+                    <li>
+                        @Html.ActionLink("Last", "ViewThread", new { page = Model.pager.TotalPages }) 
+                        
+                    </li>
+                }
+            </ul>}
+    </div>
+</div>
+
+    @Html.Action("AddPost", "Post", new { threadId = Model.threadId })
+
+    <input type="submit" value="Home" class="btn btn-primary pull-right" onclick="location.href='@Url.Action("Index", "Home")'" />

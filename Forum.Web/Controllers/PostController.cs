@@ -23,7 +23,7 @@ namespace Forum.Web.Controllers
         {
             int threadId = Posts.Posts.FirstOrDefault(p => p.IdPost == postId).IdThread;
             Posts.DeletePost(postId);
-            return RedirectToAction("ViewThread","Section", new { threadId = threadId });
+            return RedirectToAction("ViewThread","Thread", new { threadId = threadId });
         }
 
 

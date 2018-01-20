@@ -11,6 +11,7 @@ namespace Forum.Web.Models
     public class SectionViewModel
     {
         EFPosts Posts;
+        public Pager pager { get; set; }
         public SectionViewModel(int sectionId, EFSections sections, EFThreards threads, EFPosts posts, IPrincipal user)
         {
             Name = sections.Sections.First(x => x.IdSection == sectionId).SectionName;

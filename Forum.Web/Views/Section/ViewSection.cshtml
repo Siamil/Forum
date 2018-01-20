@@ -19,11 +19,11 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model.threads)
+            @foreach (var item in Model.threads.Skip((Model.pager.CurrentPage - 1) * Model.pager.PageSize).Take(Model.pager.PageSize))
             {
                 <tr>
                     <td class="col-md-4">@Html.ActionLink(item.ThreadName, "ViewThread", "Thread", new { threadId = item.IdThread }, null)</td>
-                    <td class="col-md-2 text-center">@item.UserName</td>
+                    <td class="col-md-2 text-center">@Html.ActionLink(item.UserName, "Users", "User", new { userName = item.UserName }, null)</td>
                     <td class="col-md-2 text-center"> @Model.CountPosts(item.IdThread) </td>
                     @if (Model.User.IsInRole("Admin"))
                 {
@@ -40,6 +40,49 @@
         </tbody>
 
     </table>
+    <div class="container">
+        <div class="col-md-6 col-md-offset-3">
+
+
+            <!-- items being paged -->
+            <!-- pager -->
+            @if (Model.pager.EndPage > 1)
+            {
+                <ul class="pagination">
+                    @if (Model.pager.CurrentPage > 1)
+                {
+                        <li>
+                            @Html.ActionLink("First", "ViewSection")
+
+                        </li>
+                        <li>
+                            @Html.ActionLink("Previous", "ViewSection", new { page = Model.pager.CurrentPage - 1, sectionId = Model.sectionId })
+
+                        </li>
+                    }
+
+                    @for (var page = Model.pager.StartPage; page <= Model.pager.EndPage; page++)
+                {
+                        <li class="@(page == Model.pager.CurrentPage ? "active" : "")">
+                            @Html.ActionLink(page.ToString(), "ViewSection", new { page = page, sectionId = Model.sectionId })
+
+                        </li>
+                    }
+
+                    @if (Model.pager.CurrentPage < Model.pager.TotalPages)
+                {
+                        <li>
+
+                            @Html.ActionLink("Next", "ViewSection",  new { page = Model.pager.CurrentPage + 1, sectionId = Model.sectionId })
+                        </li>
+                        <li>
+                            @Html.ActionLink("Last", "ViewSection", new { page = Model.pager.TotalPages, sectionId = Model.sectionId })
+
+                        </li>
+                    }
+                </ul>}
+        </div>
+    </div>
     <div class="btn" style="margin: 20px 20px">
         <input type="submit" value="AddThread" class="btn btn-success" onclick="location.href='@Url.Action("AddThread", "Thread", new { sectionId = Model.sectionId })'" />
 

@@ -29,7 +29,7 @@ namespace Forum.Web.Controllers
                 Posts.DeletePost(item.IdPost);
             }
             Threads.DeleteThread(threadId);
-            return RedirectToAction("ViewSection", "Home", new { sectionId = sectionId });
+            return RedirectToAction("ViewSection", "Section", new { sectionId = sectionId });
         }
         public ActionResult RemoveSection(int sectionId)
         {

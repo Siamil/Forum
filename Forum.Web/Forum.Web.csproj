@@ -221,6 +221,7 @@
     <Compile Include="Models\HomeViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Pager.cs" />
     <Compile Include="Models\SectionViewModel.cs" />
     <Compile Include="Models\ThreadViewModel.cs" />
     <Compile Include="Models\UserViewModel.cs" />

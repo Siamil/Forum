@@ -14,7 +14,8 @@ namespace Forum.Web.Models
         private EFPosts posts;
         public IPrincipal user { get; set; }
 
-        
+        public Pager pager { get; set; }
+
 
         public ThreadViewModel(int threadId, EFThreards threads, EFPosts posts, IPrincipal user)
         {
@@ -35,6 +36,7 @@ namespace Forum.Web.Models
             Post post = new Post();
             return post;
         }
-
+        
     }
+
 }

@@ -9,6 +9,7 @@ using forum.Domain.Entities;
 using Microsoft.AspNet.Identity;
 using System.Web.Security;
 using Microsoft.AspNet.Identity.EntityFramework;
+using static Forum.Web.Models.ThreadViewModel;
 
 namespace Forum.Web.Controllers
 {
@@ -18,11 +19,13 @@ namespace Forum.Web.Controllers
         private EFSections Sections = new EFSections();
         private EFThreards Threads = new EFThreards();
         private EFOverSections OverSections = new EFOverSections();
-
-        public ActionResult ViewThread(int threadId)
+        
+        public ActionResult ViewThread(int threadId, int? page)
         {
-
+            var pager = new Pager(Posts.Posts.Where(p => p.IdThread == threadId).Count(), page);
             ThreadViewModel ThreadVM = new ThreadViewModel(threadId, Threads, Posts, User);
+            
+            ThreadVM.pager = pager;
             return View(ThreadVM);
         }
 

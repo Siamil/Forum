@@ -25,7 +25,7 @@
                     @foreach (var item in Model.userThreads.ToList())
                     {
 
-                        <li> @Html.ActionLink(item.ThreadName, "ViewThread", "Thread", new { threadId = item.IdThread })</li>
+                        <li> @Html.ActionLink(item.ThreadName, "ViewThread", "Thread", new { threadId = item.IdThread }, null)</li>
 
                     }
                 </ul>

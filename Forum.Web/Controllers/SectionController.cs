@@ -25,9 +25,11 @@ namespace Forum.Web.Controllers
             Sections.SaveSection(section);
             return RedirectToAction("Index","Home", null);
         }
-        public ActionResult ViewSection(int sectionId)
+        public ActionResult ViewSection(int sectionId, int? page)
         {
+            var pager = new Pager(Threads.Threads.Where(p => p.IdSection == sectionId).Count(), page);
             SectionViewModel sectionVM = new SectionViewModel(sectionId, Sections, Threads, Posts, User);
+            sectionVM.pager = pager;
             return View(sectionVM);
         }
     }

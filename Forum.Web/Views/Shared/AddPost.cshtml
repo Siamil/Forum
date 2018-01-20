@@ -4,8 +4,9 @@
 @using (Html.BeginForm("Edit", "Post", new { threadId = ViewBag.id }))
 {
 
-    
-    @Html.TextArea("Description", null, new { @class = "form-control" })
-    @Html.ValidationSummary()
-    <input type="submit" value="Add Post" />
+    <div class="form-group col-md-12">
+        <label for="comment">Comment:</label>
+        <textarea class="form-control" rows="5" style="background-color:aliceblue" name="Description"></textarea>
+    </div>
+    <input type="submit" class="btn btn-success col-sm-offset-5" value="Add Post" />
 }
