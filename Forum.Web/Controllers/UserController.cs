@@ -17,14 +17,46 @@ namespace Forum.Web.Controllers
         private EFPosts Posts = new EFPosts();
         
         private EFThreards Threads = new EFThreards();
+        private EFMesseges Messeges = new EFMesseges();
+        ApplicationDbContext context = new ApplicationDbContext();
         
+
         public ActionResult Users(string userName)
         {
-            ApplicationDbContext context = new ApplicationDbContext();
             var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
 
-            UserViewModel UserVM = new UserViewModel(Threads, Posts, UserManager.FindByName(userName));
+
+            UserViewModel UserVM = new UserViewModel(Threads, Posts, UserManager, userName);
             return View(UserVM);
         }
+        [Authorize(Roles= "User")]
+        public ActionResult SendMessege(string to, string from)
+        {
+            MessegeViewModel messegeVM = new MessegeViewModel(from, to);
+            return View(messegeVM);
+        }
+        [HttpPost]
+        public ActionResult SaveMessege(MessegeViewModel messegeVM, string from, string to)
+        {
+            Messege messege = new Messege();
+            messege.From = from;
+            messege.Text = messegeVM.Text;
+            messege.To = to;
+            messege.Subject = messegeVM.Subject;
+            Messeges.SaveMessege(messege);
+            return RedirectToAction("index", "home", null);
+        }
+        public ActionResult UserMesseges()
+        {
+            UserMessegesViewModel VM = new UserMessegesViewModel(Messeges, User);
+            return View(VM);
+        }
+        
+        public ActionResult ShowMessege(int messegeId)
+        {
+            Messege messege = Messeges.Messeges.First(m => m.ID == messegeId);
+            return View(messege);
+        }
     }
+   
 }

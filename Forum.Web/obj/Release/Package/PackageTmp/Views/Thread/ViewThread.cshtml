@@ -1,0 +1,78 @@
+﻿
+@model Forum.Web.Models.ThreadViewModel
+@{
+    ViewBag.Title = @Model.Name;
+}
+
+<div class="text-center" style="nav-index:auto;"><h1>@Model.Name</h1></div>
+@foreach (var item in Model.Posts.Skip((Model.pager.CurrentPage - 1) * Model.pager.PageSize).Take(Model.pager.PageSize))
+{
+    
+    <div class="panel panel-default" style="border: 2px solid; background-color: antiquewhite">
+        <div class="panel-heading" style="border: 2px;">@Html.ActionLink(item.UserName, "Users","User", new { userName = item.UserName}, null)  <p class="text-left">
+    @item.DateTime
+        @if (Model.user.Identity.Name == item.UserName || Model.user.IsInRole("Admin"))
+        {
+
+            <input type="submit" value="Edit Post" class="btn btn-success pull-right" style="margin:0px 5px" onclick="location.href='@Url.Action("EditPost", "Post", new { postId = item.IdPost }, null)'" />
+
+
+                <input type="submit" value="Remove Post" class="btn btn-danger pull-right" onclick="location.href='@Url.Action("RemovePost", "Post", new { postId = item.IdPost }, null)'" />
+
+        }
+    </p>
+
+            <div class="container panel-body text-left" style="margin: 2px 2px; word-wrap:break-word">
+                @item.Description
+            </div>
+        </div> 
+        
+    </div>
+}
+<div class="container">
+    <div class="col-md-6 col-md-offset-3">
+        
+
+        <!-- items being paged -->
+        <!-- pager -->
+        @if (Model.pager.EndPage > 1)
+        {
+            <ul class="pagination">
+                @if (Model.pager.CurrentPage > 1)
+                {
+                    <li>
+                        @Html.ActionLink("First", "ViewThread", new { threadId = Model.threadId }) 
+                        
+                    </li>
+                    <li>
+                        @Html.ActionLink("Previous", "ViewThread", new { page = Model.pager.CurrentPage - 1, threadId = Model.threadId }) 
+                        
+                    </li>
+                }
+
+                @for (var page = Model.pager.StartPage; page <= Model.pager.EndPage; page++)
+                {
+                    <li class="@(page == Model.pager.CurrentPage ? "active" : "")">    
+                        @Html.ActionLink(page.ToString(), "ViewThread", new { page = page, threadId = Model.threadId})
+                        
+                    </li>
+                }
+
+                @if (Model.pager.CurrentPage < Model.pager.TotalPages)
+                {
+                    <li>
+                        
+                        @Html.ActionLink("Next", "ViewThread", new { page = Model.pager.CurrentPage + 1, threadId = Model.threadId }) 
+                    </li>
+                    <li>
+                        @Html.ActionLink("Last", "ViewThread", new { page = Model.pager.TotalPages, threadId = Model.threadId }) 
+                        
+                    </li>
+                }
+            </ul>}
+    </div>
+</div>
+
+   <div class="text-center">@Html.Action("AddPost", "Thread", new { threadId = Model.threadId }) </div> 
+
+    <input type="submit" value="Home" class="btn btn-primary pull-right" onclick="location.href='@Url.Action("Index", "Home")'" />

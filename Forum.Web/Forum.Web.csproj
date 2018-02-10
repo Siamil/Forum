@@ -216,14 +216,17 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Infrastrucure\BanAuthAttribute.cs" />
     <Compile Include="Infrastrucure\NinjectDependencyResolver.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\HomeViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\MessegeViewModel.cs" />
     <Compile Include="Models\Pager.cs" />
     <Compile Include="Models\SectionViewModel.cs" />
     <Compile Include="Models\ThreadViewModel.cs" />
+    <Compile Include="Models\UserMessegesViewModel.cs" />
     <Compile Include="Models\UserViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -240,6 +243,7 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Properties\PublishProfiles\ForumWeb20180131023528 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -293,6 +297,9 @@
     <Content Include="Views\Thread\AddThread.cshtml" />
     <Content Include="Views\User\Users.cshtml" />
     <Content Include="Views\Post\EditPost.cshtml" />
+    <Content Include="Views\User\SendMessege.cshtml" />
+    <Content Include="Views\User\UserMesseges.cshtml" />
+    <Content Include="Views\User\ShowMessege.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

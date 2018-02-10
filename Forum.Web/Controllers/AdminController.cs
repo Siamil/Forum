@@ -17,6 +17,7 @@ namespace Forum.Web.Controllers
         private EFPosts Posts = new EFPosts();
         private EFSections Sections = new EFSections();
         private EFThreards Threads = new EFThreards();
+        private EFBans Bans = new EFBans();
         public ActionResult Index()
         {
             return View();
@@ -42,6 +43,13 @@ namespace Forum.Web.Controllers
                 Threads.DeleteThread(item.IdThread);
             }
             Sections.DeleteSection(sectionId);
+            return RedirectToAction("Index", "Home");
+        }
+        public ActionResult BanUser(string userName)
+        {
+            Ban ban = new Ban();
+            ban.UserName = userName;
+            Bans.SaveBan(ban);
             return RedirectToAction("Index", "Home");
         }
     }

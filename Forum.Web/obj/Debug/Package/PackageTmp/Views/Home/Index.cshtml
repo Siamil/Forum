@@ -1,0 +1,65 @@
+﻿@using Forum.Web.Models
+@model Forum.Web.Models.HomeViewModel
+    @{
+        ViewBag.Title = "Index";
+    }
+
+<div class="text-center"><img src="https://www.wykop.pl/cdn/c3201142/comment_6GLGMeRs0g9XdF1gTKUDtLrxOluIgP6k.jpg" style="height:100px;" /></div>
+    @foreach (var over in Model.OverSections.OverSections)
+    {
+        <div class="container panel-default" style="margin:5px 5px">
+            <div class="panel-heading panel-primary panel-title" >@over.Name</div>
+            <table class="table table-bordered col-md-2 panel-body" border="1" style="background-color: white;">
+                <colgroup>
+                    <col>
+                    <col span="2" class="info">
+                    <col span="2" class="success">
+                </colgroup>
+                <thead class="thead-inverse ">
+                    <tr>
+                        <th>Section Name </th>
+                        <th class="text-center">Number Of Threads</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Sections.Sections)
+                {
+                    if (item.OverSectionId == over.OverSectionId)
+                    {
+                            <tr>
+                                <td class="col-md-6">@Html.ActionLink(item.SectionName, "ViewSection", "Section", new { sectionId = item.IdSection },null)</td>
+                                <td class="col-md-4 text-center">@Model.CountThreads(item.IdSection)</td>
+                                @if (Model.User.IsInRole("Admin"))
+                                {
+                                    <td class="col-md-2" style="margin: 20px 20px">
+                                        <input type="submit" value="Remove Section" class="btn btn-primary" onclick="location.href='@Url.Action("RemoveSection", "Admin", new { sectionId = item.IdSection })'" />
+                                    </td>
+                                }
+                            </tr>
+                        }
+                    }
+                </tbody>
+
+            </table>
+            @if (Model.User.IsInRole("Admin"))
+            {
+                using (Html.BeginForm("SaveSection", "Section", new { overSectionId = over.OverSectionId}))
+                {
+                    @Html.ValidationSummary()
+                    <div class="col-md-2">
+                        @Html.TextBox("sectionName")
+
+                    </div>
+                    <input type="submit" class="btn btn-success " value="Add Section" />
+
+                }
+            }
+
+        </div>
+
+    }
+
+
+
+
+

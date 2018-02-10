@@ -20,9 +20,10 @@ namespace Forum.Web
     {
         public Task SendAsync(IdentityMessage message)
         {
-            // Plug in your email service here to send an email.
+             sendMail(message);
             return Task.FromResult(0);
         }
+
         void sendMail(IdentityMessage message)
         {
             #region formatter
@@ -33,14 +34,14 @@ namespace Forum.Web
             #endregion
 
             MailMessage msg = new MailMessage();
-            msg.From = new MailAddress("joe@contoso.com");
+            msg.From = new MailAddress("smoogacz@gmail.com");
             msg.To.Add(new MailAddress(message.Destination));
             msg.Subject = message.Subject;
             msg.AlternateViews.Add(AlternateView.CreateAlternateViewFromString(text, null, MediaTypeNames.Text.Plain));
             msg.AlternateViews.Add(AlternateView.CreateAlternateViewFromString(html, null, MediaTypeNames.Text.Html));
 
             SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", Convert.ToInt32(587));
-            System.Net.NetworkCredential credentials = new System.Net.NetworkCredential("joe@contoso.com", "XXXXXX");
+            System.Net.NetworkCredential credentials = new System.Net.NetworkCredential("smoogacz@gmail.com", "kamilxd14");
             smtpClient.Credentials = credentials;
             smtpClient.EnableSsl = true;
             smtpClient.Send(msg);

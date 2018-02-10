@@ -68,7 +68,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Concrete\EFBans.cs" />
     <Compile Include="Concrete\EFDbContext.cs" />
+    <Compile Include="Concrete\EFMesseges.cs" />
     <Compile Include="Concrete\EFOverSections.cs" />
     <Compile Include="Concrete\EFPosts.cs" />
     <Compile Include="Concrete\EFThreards.cs" />

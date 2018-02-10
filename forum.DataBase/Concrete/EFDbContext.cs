@@ -14,6 +14,8 @@ namespace forum.DataBase.Concrete
         public DbSet<Section> Sections { get; set; }
         public DbSet<Thread> Threads { get; set; }
         public DbSet<OverSection> OverSections { get; set; }
-        
+        public DbSet<Messege> Messeges { get; set; }
+        public DbSet<Ban> Bans { get; set; }
+
     }
 }

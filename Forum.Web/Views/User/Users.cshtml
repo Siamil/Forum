@@ -4,10 +4,11 @@
     ViewBag.Title = "Users";
 }
 
-<table class="table-bordered" align="center" style="margin-top: 20px;">
+<table class="table table-bordered">
     <thead>
         <tr>
             <th>Name</th>
+            <th>Role</th>
             <th>Number of Posts</th>   
             <th>Threads made by user</th>
         </tr>
@@ -15,9 +16,18 @@
     <tbody>
         <tr>
             <td>
-                @Model.user.UserName
+                @Model.user.UserName            
             </td>
-            <td class="text-center">
+            <td>
+                
+                    @foreach (var item in Model.userRoles)
+                    {<div class="text-success">
+                    @item.ToString()
+                </div>
+                    }
+               
+            </td>
+            <td class="text-center col-xs-3">
                 @Model.CountPosts()
             </td>
             <td>
@@ -34,8 +44,19 @@
                 </tr>
             </tbody>
 </table>
+@if (Model.user.UserName != User.Identity.Name)
+{
+<div class="btn" style="margin: 20px 20px">
+    <input type="submit" value="Send Messege" class="btn btn-success" onclick="location.href='@Url.Action("SendMessege", "User", new { From = User.Identity.Name, To = Model.user.UserName })'" />
 
-        
+</div>
+}
+@if (User.IsInRole("Admin"))
+{
+        <div class="btn" style="margin: 20px 20px">
+    <input type="submit" value="Ban User" class="btn btn-warning" onclick="location.href='@Url.Action("BanUser", "Admin", new { userName = Model.user.UserName })'" />
 
+</div>
+}
 
 

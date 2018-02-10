@@ -11,6 +11,7 @@ namespace forum.Domain.Entities
     {
         [Key]
         public int IdSection { get; set; }
+        [Required(ErrorMessage = "Enter Name")]
         public string SectionName { get; set; }
         public int OverSectionId { get; set; }
     }

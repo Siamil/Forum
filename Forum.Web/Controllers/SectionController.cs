@@ -21,9 +21,13 @@ namespace Forum.Web.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult SaveSection(Section section, int overSectionId)
         {
-            section.OverSectionId = overSectionId;
-            Sections.SaveSection(section);
-            return RedirectToAction("Index","Home", null);
+            if (ModelState.IsValid) {
+                section.OverSectionId = overSectionId;
+                Sections.SaveSection(section);
+            }
+                return RedirectToAction("Index", "Home", null);
+            
+            
         }
         public ActionResult ViewSection(int sectionId, int? page)
         {

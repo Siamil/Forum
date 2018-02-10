@@ -20,7 +20,7 @@ namespace Forum.Web.Controllers
         private EFThreards Threads = new EFThreards();
         private EFOverSections OverSections = new EFOverSections();
         
-        public ActionResult ViewThread(int threadId, int? page)
+        public ActionResult ViewThread(int threadId, int page = 1)
         {
             var pager = new Pager(Posts.Posts.Where(p => p.IdThread == threadId).Count(), page);
             ThreadViewModel ThreadVM = new ThreadViewModel(threadId, Threads, Posts, User);
@@ -28,7 +28,7 @@ namespace Forum.Web.Controllers
             ThreadVM.pager = pager;
             return View(ThreadVM);
         }
-
+        [Authorize(Roles = "User")]
         public ActionResult AddThread(int sectionId)
         {
             Thread thread = new Thread();
@@ -36,12 +36,27 @@ namespace Forum.Web.Controllers
             return View(thread);
         }
         [HttpPost]
-        public ActionResult SaveThread(Thread thread, int sectionId)
+        [Authorize(Roles = "User")]
+        public ActionResult AddThread(Thread thread, int sectionId)
         {
             thread.UserName = User.Identity.Name;
             thread.IdSection = sectionId;
-            Threads.SaveThread(thread);
-            return RedirectToAction("ViewSection","Section", new { sectionId = thread.IdSection });
+            ViewBag.Id = sectionId;
+            if (ModelState.IsValid)
+            {
+                
+                Threads.SaveThread(thread);
+                return RedirectToAction("ViewSection", "Section", new { sectionId = thread.IdSection });
+            }
+            
+            else return View(thread);
+        }
+        [ChildActionOnly]
+        
+        public ActionResult AddPost(int threadId, Post post = null)
+        {
+            ViewBag.id = threadId;
+            return PartialView(post);
         }
     }
 }

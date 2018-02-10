@@ -9,6 +9,7 @@ namespace forum.Domain.Entities
 {
     public class Thread
     {
+        [Required(ErrorMessage ="Enter thread name")]
         public string ThreadName { get; set; }
         [Key]
         public int IdThread { get; set; }

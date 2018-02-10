@@ -1,0 +1,13 @@
+﻿@model forum.Domain.Entities.Post
+
+
+@using (Html.BeginForm("Edit", "Post", new { threadId = ViewBag.id }))
+{
+    
+    <div>
+        
+        <textarea class="form-control" rows="5" cols="100" style="background-color:aliceblue; min-width:80%" name="Description"></textarea>
+        
+    </div>
+    <input type="submit" class="btn btn-success pull-left" value="Add Post" />
+}

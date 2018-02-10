@@ -4,18 +4,18 @@
         ViewBag.Title = "Index";
     }
 
-<div class="text-center"><img src="https://i.ytimg.com/vi/tjiHmxdS4ag/hqdefault.jpg" /></div>
+<div class="text-center"><img src="https://www.wykop.pl/cdn/c3201142/comment_6GLGMeRs0g9XdF1gTKUDtLrxOluIgP6k.jpg" style="height:100px;" /></div>
     @foreach (var over in Model.OverSections.OverSections)
     {
-        <div class="panel-default">
-            <div class="panel panel-heading panel-title" style="background-color:">@over.Name</div>
+        <div class="container panel-default" style="margin:5px 5px">
+            <div class="panel-heading panel-primary panel-title" >@over.Name</div>
             <table class="table table-bordered col-md-2 panel-body" border="1" style="background-color: white;">
                 <colgroup>
                     <col>
                     <col span="2" class="info">
                     <col span="2" class="success">
                 </colgroup>
-                <thead class="thead-inverse">
+                <thead class="thead-inverse ">
                     <tr>
                         <th>Section Name </th>
                         <th class="text-center">Number Of Threads</th>
@@ -45,11 +45,12 @@
             {
                 using (Html.BeginForm("SaveSection", "Section", new { overSectionId = over.OverSectionId}))
                 {
+                    @Html.ValidationSummary()
                     <div class="col-md-2">
                         @Html.TextBox("sectionName")
 
                     </div>
-                    <input type="submit" class="btn btn-success" value="Add Section" />
+                    <input type="submit" class="btn btn-success " value="Add Section" />
 
                 }
             }

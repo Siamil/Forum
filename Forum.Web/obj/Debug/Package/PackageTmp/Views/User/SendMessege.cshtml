@@ -1,0 +1,18 @@
+﻿@model Forum.Web.Models.MessegeViewModel
+
+@{
+    ViewBag.Title = "SendMessege";
+}
+
+<h2>SendMessege</h2>
+@using (Html.BeginForm("SaveMessege", "User", new { from = Model.From, to = Model.To }))
+{
+    <div class="form-group col-md-12">
+
+        @Html.TextBoxFor(m => m.Subject, new { @class = "form-control", @placeholder = "Enter Subject", @requried = "required" })
+        <label for="Text">Your Messege:</label>
+        <textarea class="form-control" rows="5" style="background-color:aliceblue" name="Text"></textarea>
+    </div>
+    <input type="submit" class="btn btn-success col-sm-offset-5" value="Send Messege" />
+}
+

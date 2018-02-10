@@ -9,7 +9,7 @@
 {
     
     <div class="panel panel-default" style="border: 2px solid; background-color: antiquewhite">
-        <div class="panel-heading" style="border: 2px;">@Html.ActionLink(item.UserName, "Users", new { userName = item.UserName})  <p class="text-left">
+        <div class="panel-heading" style="border: 2px;">@Html.ActionLink(item.UserName, "Users","User", new { userName = item.UserName}, null)  <p class="text-left">
     @item.DateTime
         @if (Model.user.Identity.Name == item.UserName || Model.user.IsInRole("Admin"))
         {
@@ -41,11 +41,11 @@
                 @if (Model.pager.CurrentPage > 1)
                 {
                     <li>
-                        @Html.ActionLink("First", "ViewThread") 
+                        @Html.ActionLink("First", "ViewThread", new { threadId = Model.threadId }) 
                         
                     </li>
                     <li>
-                        @Html.ActionLink("Previouse", "ViewThread", new { page = Model.pager.CurrentPage - 1}) 
+                        @Html.ActionLink("Previous", "ViewThread", new { page = Model.pager.CurrentPage - 1, threadId = Model.threadId }) 
                         
                     </li>
                 }
@@ -62,10 +62,10 @@
                 {
                     <li>
                         
-                        @Html.ActionLink("Next", "ViewThread", new { page = Model.pager.CurrentPage + 1 }) 
+                        @Html.ActionLink("Next", "ViewThread", new { page = Model.pager.CurrentPage + 1, threadId = Model.threadId }) 
                     </li>
                     <li>
-                        @Html.ActionLink("Last", "ViewThread", new { page = Model.pager.TotalPages }) 
+                        @Html.ActionLink("Last", "ViewThread", new { page = Model.pager.TotalPages, threadId = Model.threadId }) 
                         
                     </li>
                 }
@@ -73,6 +73,6 @@
     </div>
 </div>
 
-    @Html.Action("AddPost", "Post", new { threadId = Model.threadId })
+   <div class="text-center">@Html.Action("AddPost", "Thread", new { threadId = Model.threadId }) </div> 
 
     <input type="submit" value="Home" class="btn btn-primary pull-right" onclick="location.href='@Url.Action("Index", "Home")'" />

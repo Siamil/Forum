@@ -5,8 +5,9 @@
 }
 
 <h2>AddThread</h2>
-@using (Html.BeginForm("SaveThread", "Thread", new { sectionId = ViewBag.Id }))
+@using (Html.BeginForm("AddThread", "Thread", new { sectionId = ViewBag.Id }))
 {
+    @Html.ValidationSummary()
 <div class="form-group">
     @Html.LabelFor(m => m.ThreadName, new { @class = "col-md-2 control-label" })
     <div class="col-md-10">
