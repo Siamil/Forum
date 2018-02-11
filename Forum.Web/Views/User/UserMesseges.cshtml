@@ -5,7 +5,7 @@
 }
 
 <h2 class="text-center modal-title">Your Messeges</h2>
-<div class="col-xs-6">
+<div class="col-md-6">
     <table class="table table-bordered " style="vertical-align; float:left">
         <thead>
             <tr>
@@ -18,15 +18,36 @@
             {
                 <tr>
                     <td>@Html.ActionLink(item.Subject, "ShowMessege", new { messegeId = item.ID })</td>
-                    <td>@item.To</td>
+                    <td>@Html.ActionLink(@item.To, "Users", new { userName = item.To })</td>
         </tr>
 
             }
 
         </tbody>
     </table>
+    <div class=" visible-xs">
+        <table class="table table-bordered ">
+            <thead>
+                <tr>
+                    <th>Subject</th>
+                    <th>From</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.userMessegesRec)
+            {
+                    <tr>
+                        <td>@Html.ActionLink(item.Subject, "ShowMessege", new { messegeId = item.ID })</td>
+                        <td>@Html.ActionLink(@item.From, "Users", new { userName = item.From })</td>
+                    </tr>
+
+                }
+
+            </tbody>
+        </table>
+    </div>
 </div>
-<div class="col-xs-6">
+<div class="col-md-6 hidden-xs">
     <table class="table table table-bordered " style="vertical-align; float:left">
         <thead>
             <tr>
@@ -39,7 +60,7 @@
             {
                 <tr>
                     <td>@Html.ActionLink(item.Subject, "ShowMessege", new { messegeId = item.ID })</td>
-                    <td>@item.From</td>
+                    <td>@Html.ActionLink(@item.From, "Users", new { userName = item.From })</td>
                 </tr>
 
             }

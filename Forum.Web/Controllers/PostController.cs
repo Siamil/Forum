@@ -32,6 +32,7 @@ namespace Forum.Web.Controllers
         }
 
         [HttpPost]
+        [ValidateInput(false)]
         public ActionResult Edit(Post post, int threadId)
         {
             post.IdThread = threadId;
@@ -53,7 +54,7 @@ namespace Forum.Web.Controllers
         }
 
         [HttpPost]
-        
+        [ValidateInput(false)]
         public ActionResult SavePost(Post post)
         {
 

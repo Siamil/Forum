@@ -3,32 +3,37 @@
 @{
     ViewBag.Title = @Model.Name;
 }
+<div class="container">
+    <div class="text-center" style="nav-index:auto;"><h1>@Model.Name</h1></div>
+    @foreach (var item in Model.Posts.Skip((Model.pager.CurrentPage - 1) * Model.pager.PageSize).Take(Model.pager.PageSize))
+    {
 
-<div class="text-center" style="nav-index:auto;"><h1>@Model.Name</h1></div>
-@foreach (var item in Model.Posts.Skip((Model.pager.CurrentPage - 1) * Model.pager.PageSize).Take(Model.pager.PageSize))
-{
-    
-    <div class="panel panel-default" style="border: 2px solid; background-color: antiquewhite">
-        <div class="panel-heading" style="border: 2px;">@Html.ActionLink(item.UserName, "Users","User", new { userName = item.UserName}, null)  <p class="text-left">
-    @item.DateTime
-        @if (Model.user.Identity.Name == item.UserName || Model.user.IsInRole("Admin"))
-        {
+        <div class="panel panel-default" style="border: 2px solid; background-color: antiquewhite">
+            <div class="panel-heading" style="border: 2px;">
+                @Html.ActionLink(item.UserName, "Users", "User", new { userName = item.UserName }, null)  <p class="text-left">
+                @item.DateTime
+                
+            </p>
 
-            <input type="submit" value="Edit Post" class="btn btn-success pull-right" style="margin:0px 5px" onclick="location.href='@Url.Action("EditPost", "Post", new { postId = item.IdPost }, null)'" />
-
-
-                <input type="submit" value="Remove Post" class="btn btn-danger pull-right" onclick="location.href='@Url.Action("RemovePost", "Post", new { postId = item.IdPost }, null)'" />
-
-        }
-    </p>
-
-            <div class="container panel-body text-left" style="margin: 2px 2px; word-wrap:break-word">
-                @item.Description
+            <div class="container panel-body text-left" style="margin: 2px 2px; word-wrap:break-word;">
+                @Html.Raw(item.Description)
             </div>
-        </div> 
-        
+                @if (Model.user.Identity.Name == item.UserName || Model.user.IsInRole("Admin"))
+                {
+                    <div class="row">
+
+                        <input type="submit" value="Edit Post" class="btn btn-success pull-right" style="margin:0px 5px" onclick="location.href='@Url.Action("EditPost", "Post", new { postId = item.IdPost }, null)'" />
+
+
+                        <input type="submit" value="Remove Post" class="btn btn-danger pull-right" onclick="location.href='@Url.Action("RemovePost", "Post", new { postId = item.IdPost }, null)'" />
+
+                    </div>
+                }
+        </div>
+
     </div>
-}
+    }
+</div>
 <div class="container">
     <div class="col-md-6 col-md-offset-3">
         

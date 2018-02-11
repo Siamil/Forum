@@ -18,7 +18,7 @@
             {
                 <tr>
                     <td>@Html.ActionLink(item.Subject, "ShowMessege", new { messegeId = item.ID })</td>
-                    <td>@item.To</td>
+                    <td>@Html.ActionLink(@item.To, "Users", new { userName = item.To })</td>
         </tr>
 
             }
@@ -39,7 +39,7 @@
             {
                 <tr>
                     <td>@Html.ActionLink(item.Subject, "ShowMessege", new { messegeId = item.ID })</td>
-                    <td>@item.From</td>
+                    <td>@Html.ActionLink(@item.From, "Users", new { userName = item.From })</td>
                 </tr>
 
             }

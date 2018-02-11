@@ -14,6 +14,7 @@ namespace forum.Domain.Entities
         public int IdPost { get; set; }
         public int IdThread { get; set; }
         [Required(ErrorMessage = "Empty Post")]
+        
         public string Description { get; set; }
         public DateTime DateTime { get; set; }       
         public string UserName {get; set;}

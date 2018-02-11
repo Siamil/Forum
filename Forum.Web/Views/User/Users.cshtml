@@ -3,14 +3,14 @@
 @{
     ViewBag.Title = "Users";
 }
-
+<div class="container">
 <table class="table table-bordered">
     <thead>
         <tr>
             <th>Name</th>
             <th>Role</th>
             <th>Number of Posts</th>   
-            <th>Threads made by user</th>
+            <th class="hidden-xs">Threads made by user</th>
         </tr>
     </thead>
     <tbody>
@@ -30,7 +30,7 @@
             <td class="text-center col-xs-3">
                 @Model.CountPosts()
             </td>
-            <td>
+            <td class="hidden-xs">
                 <ul>
                     @foreach (var item in Model.userThreads.ToList())
                     {
@@ -42,6 +42,20 @@
 
                 </td>
                 </tr>
+        <tr class="visible-xs">
+            <td>Threads made by user</td>
+            <td class="visible-xs">
+                <ul>
+                    @foreach (var item in Model.userThreads.ToList())
+                    {
+
+                        <li> @Html.ActionLink(item.ThreadName, "ViewThread", "Thread", new { threadId = item.IdThread }, null)</li>
+
+                    }
+                </ul>
+
+            </td>
+        </tr>
             </tbody>
 </table>
 @if (Model.user.UserName != User.Identity.Name)
@@ -58,5 +72,5 @@
 
 </div>
 }
-
+    </div>
 

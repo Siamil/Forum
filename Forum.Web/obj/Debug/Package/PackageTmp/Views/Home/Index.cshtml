@@ -8,53 +8,65 @@
     @foreach (var over in Model.OverSections.OverSections)
     {
         <div class="container panel-default" style="margin:5px 5px">
-            <div class="panel-heading panel-primary panel-title" >@over.Name</div>
-            <table class="table table-bordered col-md-2 panel-body" border="1" style="background-color: white;">
-                <colgroup>
-                    <col>
-                    <col span="2" class="info">
-                    <col span="2" class="success">
-                </colgroup>
-                <thead class="thead-inverse ">
-                    <tr>
-                        <th>Section Name </th>
-                        <th class="text-center">Number Of Threads</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model.Sections.Sections)
+            <div class="row panel-heading panel-primary panel-title" >@over.Name</div>
+            <div class="row">
+                <table class="container table table-bordered col-md-2 panel-body" border="1" style="background-color: white;">
+                    <colgroup>
+                        <col>
+                        <col span="2" class="info">
+                        <col span="2" class="success">
+                    </colgroup>
+                    <thead class="thead-inverse ">
+                        <tr>
+                            <th>Section Name </th>
+                            <th class="text-center">Number Of Threads</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Sections.Sections)
                 {
                     if (item.OverSectionId == over.OverSectionId)
                     {
-                            <tr>
-                                <td class="col-md-6">@Html.ActionLink(item.SectionName, "ViewSection", "Section", new { sectionId = item.IdSection },null)</td>
-                                <td class="col-md-4 text-center">@Model.CountThreads(item.IdSection)</td>
-                                @if (Model.User.IsInRole("Admin"))
-                                {
-                                    <td class="col-md-2" style="margin: 20px 20px">
-                                        <input type="submit" value="Remove Section" class="btn btn-primary" onclick="location.href='@Url.Action("RemoveSection", "Admin", new { sectionId = item.IdSection })'" />
-                                    </td>
-                                }
-                            </tr>
+                                
+                                <tr>
+                                    <td class="col-x-6">@Html.ActionLink(item.SectionName, "ViewSection", "Section", new { sectionId = item.IdSection }, null)</td>
+                                    <td class="col-md-4 text-center">@Model.CountThreads(item.IdSection)</td>
+                                    @if (Model.User.IsInRole("Admin"))
+                                    {
+                                        <td class="col-xs-2">
+                                            <input type="submit" value="Remove Section" class="btn btn-primary" onclick="location.href='@Url.Action("RemoveSection", "Admin", new { sectionId = item.IdSection })'" />
+                                        </td>
+                                    }
+                                </tr>
+                            }
                         }
-                    }
-                </tbody>
+                    </tbody>
 
-            </table>
-            @if (Model.User.IsInRole("Admin"))
-            {
-                using (Html.BeginForm("SaveSection", "Section", new { overSectionId = over.OverSectionId}))
+                </table>
+            </div>
+            
+            <div class="container">
+                @if (Model.User.IsInRole("Admin"))
                 {
-                    @Html.ValidationSummary()
-                    <div class="col-md-2">
-                        @Html.TextBox("sectionName")
+                    using (Html.BeginForm("SaveSection", "Section", new { overSectionId = over.OverSectionId }))
+                    {
+                        @Html.ValidationSummary()
+                        <div class="row">
+                            <div class="col-xs-2">
+                                @Html.TextBox("sectionName")
+                            </div>
+                            
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-4"><input type="submit" class="btn btn-success" value="Add Section" /></div>
+                        </div>
 
-                    </div>
-                    <input type="submit" class="btn btn-success " value="Add Section" />
 
+                    }
                 }
-            }
 
+            </div>
+     
         </div>
 
     }

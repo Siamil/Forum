@@ -14,6 +14,7 @@
     @Html.HiddenFor(m => m.UserName)
     @Html.HiddenFor(m => m.IdThread)
     @Html.HiddenFor(m => m.DateTime)
-    @Html.TextArea("Description")
-    <input type="submit" value="Add Post" />
+    <textarea class="form-control" rows="5" cols="100" style="background-color:aliceblue; min-width:80%" name="Description">@Model.Description</textarea>
+    
+    <input type="submit" class="btn btn-success" value="Save Post" />
 }

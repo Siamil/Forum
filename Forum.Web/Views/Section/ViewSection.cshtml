@@ -2,44 +2,50 @@
 @model Forum.Web.Models.SectionViewModel
 
 
-<div class="panel" style="margin:15px 15px; padding:5px 5px">
+<div class="container">
     <div class="panel-heading text-center"><h1>@Model.Name</h1></div>
-    <table class="table table-striped col-md-2">
-        <colgroup>
-            <col>
-            <col span="2" class="info">
-            <col span="2" class="success">
-        </colgroup>
-        <thead class="thead-inverse">
-            <tr>
-                <th>Thread Name </th>
-                <th class="text-center">Thread Author</th>
-                <th class="text-center">Number of posts</th>
+    <div class="row">
+        
+            <table class="table table-striped col-md-12 col-xs-2">
+               
+                <thead class="thead-inverse">
+                    <tr>
+                        <th>Thread Name </th>
+                        <th class="text-center ">Thread Author</th>
+                        <th class="text-center hidden-xs">Number of posts</th>
 
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model.threads.Skip((Model.pager.CurrentPage - 1) * Model.pager.PageSize).Take(Model.pager.PageSize))
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.threads.Skip((Model.pager.CurrentPage - 1) * Model.pager.PageSize).Take(Model.pager.PageSize))
             {
-                <tr>
-                    <td class="col-md-4">@Html.ActionLink(item.ThreadName, "ViewThread", "Thread", new { threadId = item.IdThread }, null)</td>
-                    <td class="col-md-2 text-center">@Html.ActionLink(item.UserName, "Users", "User", new { userName = item.UserName }, null)</td>
-                    <td class="col-md-2 text-center"> @Model.CountPosts(item.IdThread) </td>
-                    @if (Model.User.IsInRole("Admin"))
+                        <tr>
+                            <td class="col-md-4 ">@Html.ActionLink(item.ThreadName, "ViewThread", "Thread", new { threadId = item.IdThread }, null)</td>
+                            <td class="col-md-4  text-center">@Html.ActionLink(item.UserName, "Users", "User", new { userName = item.UserName }, null)</td>
+                            <td class="col-md-2  hidden-xs text-center"> @Model.CountPosts(item.IdThread) </td>
+                            @if (Model.User.IsInRole("Admin"))
                 {
-                        <td class="col-md-2" style="margin: 20px 20px">
-                            <input type="submit" value="Remove Thread" class="btn btn-danger"  onclick="location.href='@Url.Action("RemoveThread", "Admin", new { threadId = item.IdThread }, null)'" />
+                                <td class="col-md-2 col-md-offset-3 hidden-xs">
+                                    <input type="submit" value="Remove Thread" class="btn btn-danger" onclick="location.href='@Url.Action("RemoveThread", "Admin", new { threadId = item.IdThread }, null)'" />
 
-                        </td>
+                                </td>
+                                <td class="visible-xs">
+                                    <a href=@Url.Action("RemoveThread", "Admin", new { threadId = item.IdThread })
+                                       class="btn btn-danger">
+                                        <span class="glyphicon glyphicon-remove"></span>
+                                       </a>
+                                </td>
+                            }
+
+                        </tr>
+
+
                     }
+                </tbody>
 
-                </tr>
-
-
-            }
-        </tbody>
-
-    </table>
+            </table>
+       
+    </div>
     <div class="container">
         <div class="col-md-6 col-md-offset-3">
 
@@ -83,9 +89,11 @@
                 </ul>}
         </div>
     </div>
-    <div class="btn" style="margin: 20px 20px">
-        <input type="submit" value="AddThread" class="btn btn-success" onclick="location.href='@Url.Action("AddThread", "Thread", new { sectionId = Model.sectionId })'" />
+    <div class="row">
+        <div class="btn" style="margin: 20px 20px">
+            <input type="submit" value="AddThread" class="btn btn-success" onclick="location.href='@Url.Action("AddThread", "Thread", new { sectionId = Model.sectionId })'" />
 
+        </div>
     </div>
 </div>
    
